@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Билеты - Музыкальный Театр</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ticket.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="resurse/logo_teatra_s_nazvaniem 1.png" type="image/png">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <ul>
+            <li>ИНФОРМАЦИЯ <img src="resurse/arrow2.png"></li>
+            <li><a href="ticket.html">БИЛЕТЫ</a></li>
+            <li>РЕПЕРТУАР <img src="resurse/arrow2.png"></li>
+            <li>ИСТОРИЯ <img src="resurse/arrow2.png"></li>
+            <li>ТРУППА <img src="resurse/arrow2.png"></li>
+            <li>КОЛЛЕКТИВ <img src="resurse/arrow2.png"></li>
+            <li>НОВОСТИ <img src="resurse/arrow2.png"></li>
+            <li>ГАСТРОЛИ <img src="resurse/arrow2.png"></li>
+            <li>СВЯЗАТЬСЯ С НАМИ <img src="resurse/arrow2.png"></li>
+        </ul>
+    </nav>
+
+    <header class="main-header">
+        <div class="header-top-row">
+           
+                <div class="left-controls">
+                    <div class="lang-selector"><img id="glob" src="resurse/globus.png"> RU <img src="resurse/arrow.png"></div>
+                    <button class="vision-btn">Версия для слабовидящих</button>
+                </div>
+                <div class="logo-container">
+                    <a href="index.html"><img src="resurse/logo_teatra_s_nazvaniem.webp" alt="Logo" class="logo-img"></a>
+                </div>
+                <div class="right-controls">
+                    <div class="phone-container"> <span class="phone">
+                            <img src="resurse/phone.png"> 
+                            Касса: (017) 275-81-26 
+                            <img src="resurse/arrow3.png" class="arrow-icon">
+                        </span>
+                        
+                        <div class="phone-tooltip">
+                            <p class="tooltip-phone">Касса: (017) 275-81-26</p>
+                            <p class="tooltip-address">220030, г. Минск, ул. Мясникова, 44</p>
+                        </div>
+                    </div>
+                    <span class="search-icon"><img src="resurse/lupa.png"></span>
+                </div>
+           
+        </div>
+
+        <div class="header-title">
+            <div class="content-wrapper">
+                <p class="subtitle">Учреждение Заслуженный коллектив Республики Беларусь</p>
+                <h1>БЕЛОРУССКИЙ ГОСУДАРСТВЕННЫЙ АКАДЕМИЧЕСКИЙ МУЗЫКАЛЬНЫЙ ТЕАТР</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="tickets-page">
+        <div class="page-title-section">
+            <div class="content-wrapper">
+                <h1 class="page-title">БИЛЕТЫ</h1>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <div class="content-wrapper flex-between">
+                <h2 class="month-label">МАРТ</h2>
+                
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label>Жанр</label>
+                        <select id="genre-filter">
+                            <option value="all">Все жанры</option>
+                            <option value="operetta">Оперетта</option>
+                            <option value="musical">Мюзикл</option>
+                            <option value="comedy">Музыкальная комедия</option>
+                            <option value="rock">Рок-опера</option>
+                            <option value="ballet">Балет</option>
+                            <option value="music">Музыкальная программа</option>
+                            <option value="kids">Спектакли для детей</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Месяц</label>
+                        <select id="month-filter">
+                            <option value="03">Март</option>
+                            <option value="04">Апрель</option>
+                            <option value="05">Май</option>
+                            <option value="06">Июнь</option>
+                            <option value="07">Июль</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tickets-list">
+
+    
+
+            <div id="tickets-catalog">
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <nav class="top-nav">
+            <ul>
+                <li>ИНФОРМАЦИЯ</li>
+                <a href="ticket.html"><li>БИЛЕТЫ</li></a>
+                <li>РЕПЕРТУАР </li>
+                <li>ИСТОРИЯ </li>
+                <li>ТРУППА </li>
+                <li>КОЛЛЕКТИВ </li>
+                <li>НОВОСТИ </li>
+                <li>ГАСТРОЛИ </li>
+                <li>СВЯЗАТЬСЯ С НАМИ</li>
+            </ul>
+         </nav>
+
+        <div class="info_footer">
+            <div class="footer">
+                <div><p>Copyright © 2015 - 2026</p></div>
+                <div><p>Veronika</p></div>
+            </div>
+        </div>
+        
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="tickets_logic.js"></script>
+
+</body>
+</html>
