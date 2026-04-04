@@ -1,0 +1,586 @@
+:root {
+    /* Благородная палитра Большого театра */
+    --royal-red: #8b0000;    /* Партер (VIP) */
+    --gold: #b08d57;         /* Выбранные места */
+    --bronze: #cd7f32;       /* Средняя категория */
+    --sand: #d2b48c;         /* Бюджетная категория */
+    --dark-grey: #2c2c2c;    /* Сцена / Текст */
+    --booked: #e0e0e0;       /* Занято (светло-серый, чтобы не отвлекать) */
+    --bg-paper: #f9f7f2;     /* Фон страницы */
+    --selected: #b08d57;
+}
+
+body { 
+    font-family: 'Roboto';
+    background-color: var(--bg-paper);
+    color: var(--dark-grey);
+    background-image: url(resurse/backgroung.png); 
+    margin: 0; 
+    padding-bottom: 0px; 
+}
+
+#header-top-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-left: 100px;
+    gap: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.logo-container img{
+    width: 200px;
+}
+
+.selected-event-header {
+    display: flex;
+    gap: 20px;
+}
+
+.event-img img {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.event-text-details h2 {
+    margin: 0;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.event-text-details p {
+    margin: 5px 0 0 0;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+main{
+    display: flex;
+}
+.hall-map { 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: 
+    column; align-items: 
+    center; 
+    width: 900px;
+}
+        
+.stage { 
+    width: 600px; 
+    height: 35px; 
+    background: linear-gradient(to bottom, #111, #333);
+    color: #fff; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 0 0 100px 100px; 
+    font-size: 12px; 
+    letter-spacing: 5px;
+    font-weight: 300; 
+    margin-bottom: 60px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* "Тень" от сцены в зал */
+}
+        
+.parter-container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 1px; 
+}
+        
+/* Расстояние между первым и вторым партером (после 11 ряда) */
+#parter-1 { 
+    margin-bottom: 35px; 
+} 
+
+.row { 
+    display: flex; 
+    align-items: center; 
+    justify-content: 
+    center; 
+    gap: 2px; 
+}
+
+.row-num { 
+    width: 25px; 
+    text-align: center; 
+    font-size: 10px;  
+    color: rgb(136, 136, 136); 
+}
+        
+.side-sections { 
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
+    gap: 20px; 
+}
+        
+.seat {
+    width: 16px; 
+    height: 17px; 
+    border-radius: 10px 10px 1px 1px;
+    cursor: pointer;
+    font-size: 8px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border: none;
+    font-weight: bold; 
+    transition: all 0.2s ease;
+}
+
+.seat:hover:not(.booked) { 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 8px rgba(1, 1, 0, 0.4);
+    background: var(--gold) !important;
+}
+        
+input[type="checkbox"] { 
+    display: none; 
+}
+
+input:checked + .seat { 
+    background: var(--selected) !important; 
+    color: white; 
+    box-shadow: 0 4px 8px rgba(1, 1, 0, 0.4);
+}
+        
+.c-1 { background: var(--bronze); }
+.c-2 { background: var(--royal-red); }
+.c-3 { background: var(--sand); }
+.c-4 { background: #e8dcc4; }
+.c-5 { background: var(--gold) !important; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); } /* Ваши билеты */
+.c-6 { background: var(--booked); cursor: not-allowed; }
+
+.booked { 
+    background: var(--booked) !important; 
+    opacity: 0.4;
+}
+
+.central-gap { 
+    width: 100px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.lodge-box { 
+    border: 0.5px solid rgba(31, 31, 31, 0.334); 
+    padding: 1px; 
+    background: rgba(255,255,255,0.1); 
+    border-radius: 3px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    margin: 0; /* Прижимаем ложу к рядам выше и ниже */
+}
+        
+.lodge-title { 
+    font-size: 7px; 
+    font-weight: bold; 
+    margin-bottom: 1px; 
+    color: #222; 
+    text-transform: uppercase; 
+}
+
+.benuar { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px; 
+    margin-top: 50px; 
+}
+.b-left { 
+    transform: rotate(18deg) translateX(-15px); 
+}
+.b-right { 
+    transform: rotate(-18deg) translateX(15px); 
+}
+
+.tickets { 
+    bottom: 0; 
+    background: white; 
+    width: 200px; 
+    padding: 15px; 
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3); 
+}
+
+button { 
+    padding: 10px 30px; 
+    background: #333; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start; /* Чтобы корзина не растягивалась на всю высоту зала */
+}
+
+.hall-wrapper {
+    flex: 0 1 auto;
+}
+
+/* Окно просмотра */
+.zoom-viewport {
+    width: 100%;
+    overflow: auto; /* Позволяет прокручивать зал, если он больше окна */
+    background-color: rgba(198, 190, 149, 0.338); 
+    border: 1px solid rgba(0,0,0,0.1);
+    cursor: grab; /* Визуальный намек, что карту можно двигать */
+}
+
+/* Сама карта, которая будет уменьшаться/увеличиваться */
+.hall-map {
+    transition: transform 0.3s ease-out; /* Плавность зума */
+    transform-origin: top center; /* Масштаб относительно верха (сцены) */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Блок с кнопками */
+.zoom-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.zoom-controls button {
+    background: linear-gradient(to bottom, #111, #333);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.plus-minus button{
+    width: 10px;
+    height: 30px;
+}
+
+.sbros button{
+    width: 40px;
+    height: 30px;
+}
+
+.sbros{
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: lighter;
+}
+
+.zoom-controls button:hover {
+    background-color: var(--gold);
+}
+
+.booking-sidebar {
+    width: 320px;
+    position: sticky; /* Корзина будет "ехать" за пользователем при скролле зала */
+    top: 20px;
+}
+
+.cart-container {
+    background-color: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    padding: 10px 30px 30px 30px;
+}
+
+.cart-container h3{
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 2px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+/* ОГРАНИЧЕНИЕ ВЫСОТЫ И ПРОКРУТКА */
+.cart-items-list {
+    margin: 15px 0;
+    max-height: 300px; /* Высота блока до появления скролла */
+    overflow-y: auto;  /* Включает вертикальную прокрутку */
+    padding-right: 5px;
+}
+
+/* Стилизация скроллбара, чтобы он был аккуратным */
+.cart-items-list::-webkit-scrollbar {
+    width: 6px;
+}
+.cart-items-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.4);
+    margin-bottom: 5px;
+    padding: 8px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.195);
+}
+
+.order-btn {
+    width: 100%;
+    background: var(--dark-grey);
+    letter-spacing: 2px;
+    padding: 15px;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.order-btn:hover:not(:disabled) {
+    background: var(--royal-red);
+}
+
+.remove-item {
+    color: #737373;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.summary-line:nth-child(1) {
+    padding-bottom: 10px;
+}
+
+.legend-container {
+    display: flex;
+    justify-content: center; /* Центрируем по горизонтали */
+    gap: 30px;
+    margin: 30px auto; /* Отступ сверху и центровка контейнера */
+    padding: 15px;
+    background-color: rgba(198, 190, 149, 0.338); 
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-item p {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* Фикс для main-container, чтобы он не прижимал футер слишком сильно */
+.main-container {
+    margin-bottom: 0; 
+}
+/* Модальные окна */
+.modal { 
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.7); 
+}
+
+.order-btn:disabled {
+    background-color: #555; /* Серый цвет */
+    cursor: not-allowed;    /* Курсор запрета */
+    opacity: 0.6;
+}
+
+.auth-tabs { 
+    display: flex; 
+    margin-bottom: 20px; 
+}
+.auth-tabs button { 
+    flex: 1; 
+    padding: 10px; 
+    cursor: pointer; 
+    border: none; 
+}
+.active-tab { 
+    background: #333; 
+    color: #fff; 
+}
+.form-group { margin-bottom: 15px; }
+.form-group input { 
+    width: 100%; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    background: transparent; 
+    border: 1px solid #333; 
+}
+.guest-link { 
+    display: block; 
+    text-align: center; 
+    margin-top: 15px; 
+    text-decoration: underline; 
+    cursor: pointer; 
+}
+
+/* Улучшенное модальное окно */
+.modal-content { 
+    background: #ffffff; /* Светлый приятный фон */
+    margin: 10% auto; 
+    padding: 40px; 
+    width: 100%;
+    max-width: 450px; 
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: none;
+    text-align: center;
+}
+
+/* Кнопка-крестик */
+.close-x {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-x:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #222;
+    font-size: 24px;
+}
+
+.modal-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Поля ввода */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    transition: border 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #f39c12; /* Цвет в тон вашей темы */
+    outline: none;
+}
+
+/* Контейнер для кнопок */
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.checkout-btn {
+    background: var(--royal-red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.checkout-btn:hover {
+    background: #444;
+}
+
+.cancel-btn {
+    background: none;
+    border: none;
+    color: #888;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.cancel-btn:hover {
+    color: #333;
+}
+
+#step-payment .row input:focus {
+    border-color: var(--royal-red) !important;
+    outline: none;
+}
+
+#step-payment .row {
+    justify-content: space-between;
+}
+
+.credit-card-viz {
+    background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
+    border-radius: 15px;
+    padding: 25px;
+    color: white;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    text-align: left;
+    position: relative;
+    height: 180px;
+}
+
+.card-chip {
+    width: 45px;
+    height: 35px;
+    background: linear-gradient(135deg, #d4af37 0%, #f9f7f2 100%);
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.card-number-display {
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.card-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.payment-form input {
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#card-expiry, #card-cvv {
+    height: 35px;
+}
