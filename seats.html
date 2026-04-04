@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Схема зала БГАМТ - Ступенчатая Трапеция</title>
+    <link rel="icon" href="resurse/logo_teatra_s_nazvaniem 1.png" type="image/png">
+    <link rel="stylesheet" href="seats.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header id="main-header">
+    <div id="header-top-row">
+        <div class="logo-container">
+            <a href="index.html"><img src="resurse/logo_teatra_s_nazvaniem.webp" alt="Logo" class="logo-img"></a>
+        </div>
+        
+        <div id="selected-event-info" class="selected-event-header" style="display: none;">
+            <div class="event-img"><img id="header-event-img" src="" alt="Event"></div>
+            <div class="event-text-details">
+                <h2 id="header-event-name"></h2>
+                <p><span id="header-event-date"></span> в <span id="header-event-time"></span></p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="main-container">
+    <div class="hall-wrapper">
+        <div class="zoom-viewport" id="zoom-viewport">
+            <div class="hall-map" id="hall-map">
+                <div class="stage">СЦЕНА</div>
+                <div class="parter-container" id="parter-1"></div>
+
+                <div class="side-sections">
+                    <div class="benuar b-left" id="ben-2">
+                        <div class="benuar-title">БЕНУАР 2</div>
+                    </div>
+                    <div class="parter-container" id="parter-2"></div>
+                    <div class="benuar b-right" id="ben-1">
+                        <div class="benuar-title">БЕНУАР 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="zoom-controls">
+            <button class="plus-minus" onclick="changeZoom(1.1)">+</button>
+            <button class="plus-minus" onclick="changeZoom(0.9)">–</button>
+            <button class="sbros" onclick="resetZoom()">Сброс</button>
+        </div>
+    </div>
+
+    <aside class="booking-sidebar">
+        <div class="cart-container">
+            <h3>ВАШ ЗАКАЗ</h3>
+            <div id="cart-items" class="cart-items-list">
+                <p class="empty-msg">Места не выбраны</p>
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-line">Билетов: <b id="count">0</b></div>
+                <div class="summary-line">К оплате: <b id="total">0</b> BYN</div>
+                <button class="order-btn" id="order-btn" onclick="openModal()" disabled>ОФОРМИТЬ ЗАКАЗ</button>
+            </div>
+        </div>
+    </aside>
+
+    
+</main>
+
+<div class="legend-container">
+    <div class="legend-item">
+        <div class="seat c-6"></div> 
+        <p>- Нет в продаже</p>
+    </div>
+    <div class="legend-item">
+        <div class="seat c-2"></div> 
+        <p>- 50 BYN</p>
+    </div>
+    <div class="legend-item">
+        <div class="seat c-1"></div> 
+        <p>- 40 BYN</p>
+    </div>
+    <div class="legend-item">
+        <div class="seat c-3"></div> 
+        <p>- 30 BYN</p>
+    </div>
+    <div class="legend-item">
+        <div class="seat c-4"></div> 
+        <p>- 20 BYN</p>
+    </div>
+    <div class="legend-item">
+        <div class="seat c-5"></div> 
+        <p>- Ваши билеты</p>
+    </div>
+</div>
+
+<div id="regModal" class="modal">
+    <div class="modal-content">
+        <span class="close-x" onclick="closeModal()">&times;</span>
+        
+        <div id="step-contacts">
+            <h2>Оформление заказа</h2>
+            <p>Пожалуйста, введите ваши данные, чтобы мы могли отправить вам электронные билеты.</p>
+            
+            <div class="form-group">
+                <input type="text" id="user-name" placeholder="Имя Фамилия" oninput="this.value = this.value.replace(/[0-9!@#$%^&*()_+=[\]{};:'&quot;\\|,.<>/?]/g, '')" title="Имя должно содержать только буквы" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="user-email" placeholder="E-mail" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="user-phone" placeholder="Номер телефона (+375...)" oninput="this.value = this.value.replace(/[^0-9+()\- ]/g, '')" title="Введите корректный номер телефона" required>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="checkout-btn" onclick="goToPayment()">ПЕРЕЙТИ К ОПЛАТЕ</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">ОТМЕНИТЬ</button>
+            </div>
+        </div>
+
+        <div id="step-payment" style="display: none;">
+            <h2>Оплата заказа</h2>
+            
+            <div class="credit-card-viz">
+                <div class="card-chip"></div>
+                <div class="card-number-display" id="card-num-mirror">•••• •••• •••• ••••</div>
+                <div class="card-bottom-row">
+                    <div class="card-holder-display">CARDHOLDER NAME</div>
+                    <div class="card-expiry-display">MM/YY</div>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <div class="form-group">
+                    <input type="text" id="card-number" placeholder="Номер карты" maxlength="19" autocomplete="cc-number" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9 ]/g, '')">
+                </div>
+                <div class="row" style="display: flex; gap: 10px;">
+                    <input type="text" id="card-expiry" placeholder="ММ/ГГ" maxlength="5" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9/]/g, '')" style="width: 50%;">
+                    <input type="text" id="card-cvv" placeholder="CVV" maxlength="3" style="width: 50%;" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="checkout-btn" id="final-buy-btn" onclick="confirmOrder()">ОПЛАТИТЬ</button>
+                <button type="button" class="cancel-btn" id="final-cancel-btn" onclick="backToContacts()">НАЗАД</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <nav class="top-nav">
+        <ul>
+            <li>ИНФОРМАЦИЯ</li>
+            <a href="ticket.html"><li>БИЛЕТЫ</li></a>
+            <li>РЕПЕРТУАР </li>
+            <li>ИСТОРИЯ </li>
+            <li>ТРУППА </li>
+            <li>КОЛЛЕКТИВ </li>
+            <li>НОВОСТИ </li>
+            <li>ГАСТРОЛИ </li>
+            <li>СВЯЗАТЬСЯ С НАМИ</li>
+        </ul>
+    </nav>
+
+    <div class="info_footer">
+        <div class="footer">
+            <div><p>Copyright © 2015 - 2026</p></div>
+            <div><p>Veronika</p></div>
+        </div>
+    </div>
+        
+</footer>
+
+
+<script src="seats.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

@@ -9,6 +9,10 @@ const ticketData = [
     { id: 106, name: "НЕВЕСТА ИЗ ИМЕРЕТИИ", author: "Г. Канчели", desc: "музыкальная комедия в 2-х действиях", date: "10 МАРТА", monthCode: "03", weekday: "ВТОРНИК", time: "19:00", age: "+16", genre: "comedy", img: "resurse/nevesta-glavnaya.webp", price: 30.00, isPremiere: false },
     { id: 107, name: "БУРАТИНО.BY", author: "А. Рыбников", desc: "мюзикл для детей и взрослых в 2-х действиях", date: "15 МАРТА", monthCode: "03", weekday: "ВОСКРЕСЕНЬЕ", time: "11:00", age: "+6", genre: "kids", img: "resurse/buratino-glavnaya-1.webp", price: 30.00, isPremiere: false },
     { id: 201, name: "ЛЕТНИЙ КОНЦЕРТ", author: "Оркестр", desc: "Праздничная программа", date: "15 ИЮНЯ", monthCode: "06", weekday: "ПОНЕДЕЛЬНИК", time: "19:00", age: "+6", genre: "music", img: "resurse/nevesta-glavnaya.webp", price: 40.00, isPremiere: true },
+    { id: 202, name: "СВАДЬБА В МАЛИНОВКЕ", author: "Б. Александров", desc: "музыкальная комедия в 2-х действиях", date: "10 АПРЕЛЯ", monthCode: "04", weekday: "ПЯТНИЦА", time: "19:00", age: "+12", genre: "comedy", img: "resurse/malinovka2017_glavnaya.webp", price: 30.00, isPremiere: false },
+    { id: 203, name: "L'amour, l'amour – ЛЮБОВЬ, ЛЮБОВЬ", author: "Б. Александров", desc: "водевиль в 2-х действиях", date: "19 АПРЕЛЯ", monthCode: "04", weekday: "ВОСКРЕСЕНЬЕ", time: "18:00", age: "+18", genre: "comedy", img: "resurse/c7v354aqjqy.webp", price: 30.00, isPremiere: false },
+    { id: 204, name: "БАБИЙ БУНТ", author: "Е. Птичкин", desc: "музыкальная комедия в 2-х действиях", date: "23 АПРЕЛЯ", monthCode: "04", weekday: "ПЯТНИЦА", time: "19:00", age: "+12", genre: "comedy", img: "resurse/babik_2024.webp", price: 30.00, isPremiere: true },
+    { id: 205, name: "СВАДЬБА В МАЛИНОВКЕ", author: "Б. Александров", desc: "музыкальная комедия в 2-х действиях", date: "25 АПРЕЛЯ", monthCode: "04", weekday: "СУББОТА", time: "18:00", age: "+12", genre: "comedy", img: "resurse/malinovka2017_glavnaya.webp", price: 30.00, isPremiere: false },
 ];
 
 function renderTickets() {
@@ -16,11 +20,12 @@ function renderTickets() {
     const genreFilter = document.getElementById('genre-filter').value;
     const monthFilter = document.getElementById('month-filter').value;
     
+    // Обновляем заголовок месяца
     updateMonthLabel();
 
     container.innerHTML = '';
 
-    // 1. Фильтрация
+    // Фильтрация по жанру И по месяцу
     let filtered = ticketData.filter(t => {
         const matchGenre = (genreFilter === 'all' || t.genre === genreFilter);
         const matchMonth = (t.monthCode === monthFilter);
@@ -29,21 +34,16 @@ function renderTickets() {
 
     if (filtered.length === 0) {
         container.innerHTML = '<p class="no-tickets">На выбранный месяц спектаклей не найдено.</p>';
+        return;
     }
 
-    // 2. Сортировка по дате (по числу в строке "01 МАРТА")
-    filtered.sort((a, b) => {
-        const dayA = parseInt(a.date);
-        const dayB = parseInt(b.date);
-        return dayA - dayB;
-    });
+    // Сортировка по дню
+    filtered.sort((a, b) => parseInt(a.date) - parseInt(b.date));
 
-    // 3. Отрисовка
     filtered.forEach(t => {
         const row = document.createElement('div');
         row.className = 'ticket-card-row';
         
-        // Условие для плашки "Премьера"
         const premiereBadge = t.isPremiere ? `<div class="badge premiere">Премьера</div>` : '';
 
         row.innerHTML = `
@@ -65,9 +65,11 @@ function renderTickets() {
                     <div class="event-meta">
                         <span class="time">${t.time}</span>
                         <span class="age-limit">${t.age}</span>
-                        <button class="buy-btn cart-button" 
-                                data-id="${t.id}" data-name="${t.name}" 
-                                data-price="${t.price}" data-img="${t.img}">
+                        <button class="buy-btn" 
+                                data-name="${t.name}" 
+                                data-time="${t.time}"
+                                data-date="${t.date}"
+                                data-img="${t.img}">
                             Купить билет
                         </button>
                     </div>
@@ -76,11 +78,8 @@ function renderTickets() {
         `;
         container.appendChild(row);
     });
-
-   
 }
 
-// Обновление заголовка месяца (МАРТ -> АПРЕЛЬ и т.д.)
 function updateMonthLabel() {
     const select = document.getElementById('month-filter');
     const monthText = select.options[select.selectedIndex].text.toUpperCase();
@@ -88,10 +87,10 @@ function updateMonthLabel() {
     if (label) label.textContent = monthText;
 }
 
+// Запуск при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     renderTickets();
 
-    // Слушатели на оба фильтра
     document.getElementById('genre-filter').addEventListener('change', renderTickets);
     document.getElementById('month-filter').addEventListener('change', renderTickets);
 });

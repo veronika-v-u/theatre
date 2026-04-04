@@ -10,7 +10,7 @@
 .content-wrapper {
     max-width: 1180px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
 }
 
 /* 3. Линия под заголовком "БИЛЕТЫ" */
@@ -251,3 +251,4 @@ hr{
     text-align: center;
     align-items: center;
 }
+

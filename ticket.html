@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Билеты - Музыкальный Театр</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="ticket.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,17 +15,25 @@
 <body>
 
     <nav class="top-nav">
-        <ul>
-            <li>ИНФОРМАЦИЯ <img src="resurse/arrow2.png"></li>
-            <li><a href="ticket.html">БИЛЕТЫ</a></li>
-            <li>РЕПЕРТУАР <img src="resurse/arrow2.png"></li>
-            <li>ИСТОРИЯ <img src="resurse/arrow2.png"></li>
-            <li>ТРУППА <img src="resurse/arrow2.png"></li>
-            <li>КОЛЛЕКТИВ <img src="resurse/arrow2.png"></li>
-            <li>НОВОСТИ <img src="resurse/arrow2.png"></li>
-            <li>ГАСТРОЛИ <img src="resurse/arrow2.png"></li>
-            <li>СВЯЗАТЬСЯ С НАМИ <img src="resurse/arrow2.png"></li>
-        </ul>
+        <nav class="top-nav">
+            <div class="burger-menu" id="burger-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul id="nav-list">
+                <li>ИНФОРМАЦИЯ <img src="resurse/arrow2.png"></li>
+                <a href="ticket.html"><li>БИЛЕТЫ</li></a>
+                <li>РЕПЕРТУАР <img src="resurse/arrow2.png"></li>
+                <li>ИСТОРИЯ <img src="resurse/arrow2.png"></li>
+                <li>ТРУППА <img src="resurse/arrow2.png"></li>
+                <li>КОЛЛЕКТИВ <img src="resurse/arrow2.png"></li>
+                <li>НОВОСТИ <img src="resurse/arrow2.png"></li>
+                <li>ГАСТРОЛИ <img src="resurse/arrow2.png"></li>
+                <li>СВЯЗАТЬСЯ С НАМИ <img src="resurse/arrow2.png"></li>
+            </ul>
+        </nav>
     </nav>
 
     <header class="main-header">
@@ -137,6 +146,8 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="tickets_logic.js"></script>
+    <script src="ticket.js"></script>
+    <script src="main.js"></script>
 
 </body>
 </html>
