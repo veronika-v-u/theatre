@@ -205,6 +205,11 @@ a {
 .prev-btn { left: 20px; }
 .next-btn { right: 20px; }
 
+.prev-btn:hover, .next-btn:hover {
+    background-color: #c2c09c;
+    transition: 0.5s ease;   
+}
+
 
 /* Контейнер для позиционирования */
 .phone-container {
